@@ -1,0 +1,118 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+#game-screen 
+{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: rgb(171, 230, 123);
+  margin: 0;
+  display: flex;
+  overflow: hidden;
+
+}
+
+
+#player {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: rgb(241, 141, 208);
+    top: 27vh;
+    left: 7vh;
+    z-index: 1;
+}
+
+#obstacles {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+
+.rocks
+{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: rgb(100, 98, 98);
+  display: flex;
+  top: 175px;
+  left: 175px;
+  margin: 0%;
+}
+
+#rocks2
+{
+  top: 50vh;
+  left: 50vh;
+}
+
+.houses
+{
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background-color: rgb(215, 188, 231);
+  top: 10vh;
+  left: 30vh;
+}
+
+#hosue2
+{
+  left: 45vh;
+  top: -15px;
+}
+
+
+.trees
+{
+  position: relative;
+  width: 45px;
+  height: 40px;
+  background-color: green;
+  left: 60vh;
+}
+
+#tree2
+{
+  top: 100px;
+}
+
+.farmpaths
+{
+  position: relative;
+  width: 150px;
+  height: 50px;
+  background-color: yellow;
+  top: 13vh;
+  left: 60vh
+
+}
+
+.dirtpaths
+{
+  position: relative;
+  width: 50vh;
+  height: 30px;
+  background-color: brown;
+  top: 30vh;
+  left: 10px;
+  z-index: 0;
+
+}
+
+#spawnpoint
+{
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-color: blue;
+  top: 25vh;
+  left: 5vh;
+}
