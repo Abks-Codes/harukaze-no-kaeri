@@ -1,59 +1,71 @@
-const gameArea = document.getElementById("game-screen");
-const gameRect = gameArea.getBoundingClientRect();
+const gameScreen = document.getElementById("game-screen");
 const player = document.getElementById("player");
 const obstacles = document.querySelectorAll(".obstacle");
+
 let x = 45;
 let y = 230;
+const ZOOM = 2;
+const keys = {};
 
-document.addEventListener("keydown", move);
+document.addEventListener("keydown", e => keys[e.key] = true);
+document.addEventListener("keyup",   e => keys[e.key] = false);
 
-function move(e) {
+function move() {
   let dx = 0;
   let dy = 0;
 
-  if (e.key === 'ArrowUp') dy = -10;
-  if (e.key === 'ArrowDown') dy = 10;
-  if (e.key === 'ArrowLeft') dx = -10;
-  if (e.key === 'ArrowRight') dx = 10;
+  if (keys['ArrowUp'])    dy = -3;
+  if (keys['ArrowDown'])  dy = 3;
+  if (keys['ArrowLeft'])  dx = -3;
+  if (keys['ArrowRight']) dx = 3;
+
+
+
 
   x += dx;
   y += dy;
 
   obstacles.forEach(obstacle => {
-    const obstacleLeft = obstacle.offsetLeft;
-    const obstacleTop = obstacle.offsetTop;
-    const obstacleRight = obstacleLeft + obstacle.offsetWidth;
-    const obstacleBottom = obstacleTop + obstacle.offsetHeight;
+    const obstacleLeft   = obstacle.offsetLeft;
+    const obstacleTop    = obstacle.offsetTop;
+    const obstacleRight  = obstacleLeft + obstacle.offsetWidth;
+    const obstacleBottom = obstacleTop  + obstacle.offsetHeight;
 
-    const playerRight = x + player.offsetWidth;
+    const playerRight  = x + player.offsetWidth;
     const playerBottom = y + player.offsetHeight;
 
     const colliding =
-      playerRight > obstacleLeft &&
-      x < obstacleRight &&
+      playerRight  > obstacleLeft &&
+      x            < obstacleRight &&
       playerBottom > obstacleTop &&
-      y < obstacleBottom;
+      y            < obstacleBottom;
 
     if (colliding) {
-      
-      if (dx > 0) {
-        x = obstacleLeft - player.offsetWidth;
-      }
-      
-      if (dx < 0) {
-        x = obstacleRight;
-      }
-   
-      if (dy > 0) {
-        y = obstacleTop - player.offsetHeight;
-      }
-      
-      if (dy < 0) {
-        y = obstacleBottom;
-      }
+      if (dx > 0) x = obstacleLeft - player.offsetWidth;
+      if (dx < 0) x = obstacleRight;
+      if (dy > 0) y = obstacleTop  - player.offsetHeight;
+      if (dy < 0) y = obstacleBottom;
     }
   });
 
   player.style.left = `${x}px`;
-  player.style.top = `${y}px`;
+  player.style.top  = `${y}px`;
+  updateCamera();
 }
+
+function updateCamera() {
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+
+  const offsetX = centerX / ZOOM - x - player.offsetWidth / 2;
+  const offsetY = centerY / ZOOM - y - player.offsetHeight / 2;
+
+  gameScreen.style.transform = `scale(${ZOOM}) translate(${offsetX}px, ${offsetY}px)`;
+}
+
+function gameLoop() {
+  move();
+  requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
