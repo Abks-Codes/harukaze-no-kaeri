@@ -62,7 +62,7 @@ body{
   left: 30vh;
 }
 
-#hosue2
+#house2
 {
   left: 45vh;
   top: -15px;
@@ -114,4 +114,24 @@ body{
   background-color: blue;
   top: 25vh;
   left: 5vh;
+}
+
+#layout {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+#health-container {
+  width: 200px;
+  height: 20px;
+  border: 2px solid black;
+  background-color: red;
+}
+
+#health-bar {
+  width: 100%;
+  height: 100%;
+  background-color: limegreen;
+  transition: width 0.2s ease;
 }

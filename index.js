@@ -1,7 +1,10 @@
 const gameScreen = document.getElementById("game-screen");
 const player = document.getElementById("player");
 const obstacles = document.querySelectorAll(".obstacle");
+const healthBar = document.getElementById("health-bar");
 
+
+let health = 100;
 let x = 45;
 let y = 230;
 const ZOOM = 2;
